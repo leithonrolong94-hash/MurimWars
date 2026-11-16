@@ -1,0 +1,17 @@
+GA7-220501096-AA3-EV01 — MURIM WARS
+
+Contenido:
+- Código fuente de la aplicación web Spring Boot.
+- Módulo CRUD de productos.
+- Vistas HTML con Thymeleaf y estilos CSS.
+- Configuración para H2 de demostración y perfil MySQL.
+- Script SQL de creación de base de datos y tabla.
+- README con instrucciones de ejecución y versionamiento Git.
+- Archivo para pegar el enlace real del repositorio GitHub.
+
+Pendiente antes de entregar:
+1. Abrir y ejecutar el proyecto en NetBeans.
+2. Probar registro, consulta, edición y eliminación.
+3. Crear el repositorio GitHub y subir el código.
+4. Pegar el enlace real en ENLACE_REPOSITORIO.txt.
+5. Volver a comprimir la carpeta si se modifican archivos.

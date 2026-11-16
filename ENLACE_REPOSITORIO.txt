@@ -1,0 +1,6 @@
+Repositorio GitHub del proyecto Murim Wars Spring Boot
+
+Pegar aquí el enlace REAL del repositorio después de crearlo y subir el proyecto.
+Ejemplo de formato: https://github.com/USUARIO/MurimWars-SpringBoot
+
+No entregar este archivo con el ejemplo: reemplazarlo por la URL real.

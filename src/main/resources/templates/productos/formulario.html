@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' | Murim Wars'">Producto | Murim Wars</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header class="barra">
+    <a class="marca" th:href="@{/productos}">MURIM <span>WARS</span></a>
+    <span class="submarca">SISTEMA DE GESTIÓN · INVENTARIO</span>
+</header>
+<main class="contenedor estrecho">
+    <a class="volver" th:href="@{/productos}">← Volver al inventario</a>
+    <section class="panel formulario-panel">
+        <p class="etiqueta">GESTIÓN DE INVENTARIO</p>
+        <h1 th:text="${titulo}">Registrar producto</h1>
+        <div class="alerta error" th:if="${errorGeneral}" th:text="${errorGeneral}"></div>
+        <form th:action="@{/productos/guardar}" th:object="${producto}" method="post" class="formulario">
+            <input type="hidden" th:field="*{id}">
+            <label>Nombre del producto
+                <input type="text" th:field="*{nombre}" placeholder="Ej. Jean Murim edición urbana">
+                <small class="campo-error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+            </label>
+            <label>Código SKU
+                <input type="text" th:field="*{sku}" placeholder="Ej. MW-JEAN-001">
+                <small class="campo-error" th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}"></small>
+            </label>
+            <div class="dos-columnas">
+                <label>Categoría
+                    <select th:field="*{categoria}">
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Jeans">Jeans</option>
+                        <option value="Camisetas">Camisetas</option>
+                        <option value="Hoodies">Hoodies</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
+                    <small class="campo-error" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></small>
+                </label>
+                <label>Talla
+                    <input type="text" th:field="*{talla}" placeholder="Ej. 30, 32, M, L">
+                </label>
+            </div>
+            <div class="dos-columnas">
+                <label>Precio (COP)
+                    <input type="number" step="0.01" min="0.01" th:field="*{precio}" placeholder="90000">
+                    <small class="campo-error" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+                </label>
+                <label>Unidades disponibles
+                    <input type="number" min="0" th:field="*{stock}" placeholder="10">
+                    <small class="campo-error" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></small>
+                </label>
+            </div>
+            <label>Descripción
+                <textarea th:field="*{descripcion}" rows="3" placeholder="Descripción breve de la prenda"></textarea>
+            </label>
+            <div class="botonera">
+                <button class="boton principal" type="submit">Guardar producto</button>
+                <a class="boton secundario" th:href="@{/productos}">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

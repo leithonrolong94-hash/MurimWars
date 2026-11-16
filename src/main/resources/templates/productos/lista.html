@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inventario | Murim Wars</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header class="barra">
+    <a class="marca" th:href="@{/productos}">MURIM <span>WARS</span></a>
+    <span class="submarca">SISTEMA DE GESTIÓN · INVENTARIO</span>
+</header>
+<main class="contenedor">
+    <section class="encabezado">
+        <div>
+            <p class="etiqueta">PANEL DE CONTROL</p>
+            <h1>Inventario de productos</h1>
+            <p class="muted">Administra las prendas y existencias de tu tienda.</p>
+        </div>
+        <a class="boton principal" th:href="@{/productos/nuevo}">+ Nuevo producto</a>
+    </section>
+
+    <div class="alerta exito" th:if="${exito}" th:text="${exito}"></div>
+    <div class="alerta error" th:if="${error}" th:text="${error}"></div>
+
+    <section class="panel">
+        <div class="panel-titulo">
+            <h2>Productos registrados</h2>
+            <span class="contador" th:text="${#lists.size(productos)} + ' productos'">0 productos</span>
+        </div>
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                <tr>
+                    <th>Producto</th><th>SKU</th><th>Categoría</th><th>Talla</th>
+                    <th>Precio</th><th>Stock</th><th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td class="nombre" th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.sku}"></td>
+                    <td th:text="${producto.categoria}"></td>
+                    <td th:text="${producto.talla != null ? producto.talla : '-'}"></td>
+                    <td th:text="${'$ ' + #numbers.formatDecimal(producto.precio, 1, 'POINT', 0, 'COMMA')}"></td>
+                    <td><span class="stock" th:text="${producto.stock}"></span></td>
+                    <td class="acciones">
+                        <a class="enlace" th:href="@{/productos/editar/{id}(id=${producto.id})}">Editar</a>
+                        <form th:action="@{/productos/eliminar/{id}(id=${producto.id})}" method="post"
+                              onsubmit="return confirm('¿Deseas eliminar este producto?');">
+                            <button class="enlace peligro" type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(productos)}">
+                    <td colspan="7" class="vacio">Todavía no hay productos. Registra el primero para comenzar.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <footer>Murim Wars · No seguimos tendencias, creamos leyendas.</footer>
+</main>
+</body>
+</html>
